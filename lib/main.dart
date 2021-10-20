@@ -17,6 +17,22 @@ class MyApp extends StatelessWidget {
         ).copyWith(
           secondary: Colors.cyan,
         ),
+        canvasColor: Colors.blueGrey[50],
+        fontFamily: "Raleway",
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline5: const TextStyle(
+                fontSize: 18,
+                color: Color.fromRGBO(38, 45, 56, 1),
+              ),
+              bodyText1: const TextStyle(
+                color: Color.fromRGBO(38, 45, 56, 1),
+                //color: Color.fromRGBO(20, 51, 51, 1),
+              ),
+              bodyText2: const TextStyle(
+                color: Color.fromRGBO(38, 45, 56, 1),
+                //color: Color.fromRGBO(20, 51, 51, 1),
+              ),
+            ),
       ),
       home: const CategoriesScreen(),
     );
