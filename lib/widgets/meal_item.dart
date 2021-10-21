@@ -1,4 +1,5 @@
 import 'package:daily_meals/models/meal.dart';
+import 'package:daily_meals/screens/meal_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class MealItem extends StatelessWidget {
@@ -6,7 +7,12 @@ class MealItem extends StatelessWidget {
 
   final Meal? meal;
 
-  void _selectMeal() {}
+  void _selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      MealDetailScreen.routeName,
+      arguments: meal,
+    );
+  }
 
   String get _complexityText {
     switch (meal?.complexity) {
@@ -43,7 +49,7 @@ class MealItem extends StatelessWidget {
       ),
       margin: const EdgeInsets.all(16),
       child: InkWell(
-        onTap: _selectMeal,
+        onTap: () => _selectMeal(context),
         child: Column(
           children: [
             Stack(
@@ -55,7 +61,7 @@ class MealItem extends StatelessWidget {
                   ),
                   child: Image.network(
                     meal?.imageUrl as String,
-                    height: 250,
+                    height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),

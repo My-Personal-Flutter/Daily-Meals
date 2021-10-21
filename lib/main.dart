@@ -1,5 +1,7 @@
 import 'package:daily_meals/screens/category_meals_screen.dart';
 import 'package:daily_meals/screens/catgories_screen.dart';
+import 'package:daily_meals/screens/meal_detail_screen.dart';
+import 'package:daily_meals/screens/something_wrong.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -36,10 +38,32 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      initialRoute: CategoriesScreen.routeName,
+      initialRoute: "/",
       routes: {
+        "/": (ctx) => const CategoriesScreen(),
         CategoriesScreen.routeName: (ctx) => const CategoriesScreen(),
         CategoryMealsScreen.routeName: (ctx) => const CategoryMealsScreen(),
+        MealDetailScreen.routeName: (ctx) => const MealDetailScreen(),
+      },
+      onGenerateRoute: (setting) {
+        //
+        //  For dynamic routes we use this method
+        //
+        // if(setting.name == "/somethin_from_server_url"){
+        //   return ...;
+        // }else if(setting.name == "/somethin_from_server_url"){
+        //   return ...;
+        // }
+        // return MaterialPageRoute(
+        //     builder: (ctx) => const SomethingWrongScreen());
+      },
+      onUnknownRoute: (setting) {
+        //
+        //  if no routes are found
+        //  For error we use this like 404,500,200
+        //
+        return MaterialPageRoute(
+            builder: (ctx) => const SomethingWrongScreen());
       },
     );
   }
