@@ -1,4 +1,4 @@
-import 'package:daily_meals/category_item.dart';
+import 'package:daily_meals/widgets/category_item.dart';
 import 'package:daily_meals/data/dummy_data.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +13,6 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         title: const Text("Daily Meals"),
-        elevation: 6,
-        shadowColor: Theme.of(context).primaryColor,
       ),
       body: GridView(
         padding: const EdgeInsets.all(16),
