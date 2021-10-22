@@ -24,8 +24,9 @@ class MealDetailScreen extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.blueGrey,
+          width: 0.6,
         ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         color: Colors.white,
       ),
       padding: const EdgeInsets.all(4),
@@ -48,13 +49,17 @@ class MealDetailScreen extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blueGrey,
+                    width: 0.6,
+                  ),
                 ),
                 height: 300,
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
+                    Radius.circular(8),
                   ),
                   child: Image.network(
                     routeArgs.imageUrl as String,
@@ -99,7 +104,14 @@ class MealDetailScreen extends StatelessWidget {
                         leading: CircleAvatar(
                           child: Text(
                             "# ${index + 1}",
+                            style: const TextStyle(
+                              fontFamily: "Raleway",
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
                         ),
                         title: Text(routeArgs.steps![index]),
                       ),
