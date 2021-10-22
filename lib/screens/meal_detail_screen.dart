@@ -20,7 +20,7 @@ class MealDetailScreen extends StatelessWidget {
     return Container(
       height: 250,
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.blueGrey,
