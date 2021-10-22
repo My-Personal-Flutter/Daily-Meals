@@ -1,7 +1,9 @@
 import 'package:daily_meals/screens/category_meals_screen.dart';
 import 'package:daily_meals/screens/catgories_screen.dart';
+import 'package:daily_meals/screens/favourites_screen.dart';
+import 'package:daily_meals/screens/filters_screen.dart';
 import 'package:daily_meals/screens/meal_detail_screen.dart';
-import 'package:daily_meals/screens/something_wrong.dart';
+import 'package:daily_meals/screens/something_wrong_screen.dart';
 import 'package:daily_meals/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.blueGrey,
         ).copyWith(
-          secondary: Colors.cyan,
+          secondary: Colors.amber,
+          onSecondary: Colors.white,
         ),
         canvasColor: Colors.blueGrey[50],
         fontFamily: "Raleway",
@@ -45,6 +48,8 @@ class MyApp extends StatelessWidget {
         CategoriesScreen.routeName: (ctx) => const CategoriesScreen(),
         CategoryMealsScreen.routeName: (ctx) => const CategoryMealsScreen(),
         MealDetailScreen.routeName: (ctx) => const MealDetailScreen(),
+        FavouriteScreen.routeName: (ctx) => const FavouriteScreen(),
+        FiltersScreen.routeName: (ctx) => const FiltersScreen(),
       },
       onGenerateRoute: (setting) {
         //

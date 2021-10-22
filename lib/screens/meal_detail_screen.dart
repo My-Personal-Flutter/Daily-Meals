@@ -70,10 +70,7 @@ class MealDetailScreen extends StatelessWidget {
               _buildContainerWithListitem(
                 ListView.builder(
                   itemBuilder: (ctx, index) => Card(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .secondary
-                        .withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.secondary,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 16),
@@ -82,7 +79,6 @@ class MealDetailScreen extends StatelessWidget {
                         style: const TextStyle(
                           fontFamily: "Raleway",
                           fontSize: 14,
-                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
