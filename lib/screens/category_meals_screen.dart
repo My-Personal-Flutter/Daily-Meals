@@ -52,15 +52,26 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
         centerTitle: false,
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemBuilder: (ctx, index) {
-            return MealItem(
-              meal: categoryFilteredMeals[index],
-              removeItem: _removeMeal,
-            );
-          },
-          itemCount: categoryFilteredMeals.length,
-        ),
+        child: categoryFilteredMeals.isNotEmpty
+            ? ListView.builder(
+                itemBuilder: (ctx, index) {
+                  return MealItem(
+                    meal: categoryFilteredMeals[index],
+                    removeItem: _removeMeal,
+                  );
+                },
+                itemCount: categoryFilteredMeals.length,
+              )
+            : Center(
+                child: Text(
+                  "No Items of your chioce",
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
       ),
     );
   }

@@ -1,8 +1,6 @@
 import 'package:daily_meals/data/dummy_data.dart';
 import 'package:daily_meals/models/meal.dart';
 import 'package:daily_meals/screens/category_meals_screen.dart';
-import 'package:daily_meals/screens/catgories_screen.dart';
-import 'package:daily_meals/screens/favourites_screen.dart';
 import 'package:daily_meals/screens/filters_screen.dart';
 import 'package:daily_meals/screens/meal_detail_screen.dart';
 import 'package:daily_meals/screens/something_wrong_screen.dart';
@@ -27,12 +25,38 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+  final List<Meal> _favouriteMeals = [];
+
+  void _toggleFavouriteMeal(String mealId) {
+    int index = _favouriteMeals.indexWhere((element) => element.id == mealId);
+    if (index >= 0) {
+      setState(() {
+        _favouriteMeals.removeAt(index);
+      });
+    } else {
+      setState(() {
+        _favouriteMeals
+            .add(DUMMY_MEALS.firstWhere((element) => element.id == mealId));
+      });
+    }
+  }
+
+  bool _isFavourite(String mealId) {
+    return _favouriteMeals.any((element) => element.id == mealId);
+  }
+
+  void _removeFavourite(String mealId) {
+    _favouriteMeals.removeWhere((element) => element.id == mealId);
+  }
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
       _filters = filterData;
       _availableMeals = DUMMY_MEALS.where((item) {
         if (_filters["gluten"]! && !item.isGlutenFree!) {
+          // check new value and also change the default value in DUMMY Meal data
+          //to meet the condition
+          //(as the given default meal has maybe present that item in that meal or not )
           return false;
         }
         if (_filters["lactose"]! && !item.isLactoseFree!) {
@@ -82,13 +106,17 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: "/",
       routes: {
-        "/": (ctx) => const TabsScreen(),
-        CategoriesScreen.routeName: (ctx) => const CategoriesScreen(),
+        "/": (ctx) => TabsScreen(
+              favouriteMeals: _favouriteMeals,
+              removeFavourite: _removeFavourite,
+            ),
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
               availableMeals: _availableMeals,
             ),
-        MealDetailScreen.routeName: (ctx) => const MealDetailScreen(),
-        FavouriteScreen.routeName: (ctx) => const FavouriteScreen(),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(
+              toggleFavouriteMeal: _toggleFavouriteMeal,
+              isFavourite: _isFavourite,
+            ),
         FiltersScreen.routeName: (ctx) => FiltersScreen(
               filters: _filters,
               saveFilters: _setFilters,

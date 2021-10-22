@@ -3,11 +3,13 @@ import 'package:daily_meals/screens/meal_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({Key? key, @required this.meal, @required this.removeItem})
+  const MealItem(
+      {Key? key, @required this.meal, this.removeItem, this.refreshFavourite})
       : super(key: key);
 
   final Meal? meal;
   final Function? removeItem;
+  final Function? refreshFavourite;
 
   void _selectMeal(BuildContext context) {
     Navigator.of(context)
@@ -19,6 +21,9 @@ class MealItem extends StatelessWidget {
       (value) {
         if (value != null) {
           removeItem!(value);
+        }
+        if (refreshFavourite != null) {
+          refreshFavourite!();
         }
       },
     );
@@ -74,6 +79,15 @@ class MealItem extends StatelessWidget {
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        "assets/images/no_connection.png",
+                        height: 200,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
                 Positioned(

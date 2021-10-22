@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 class MealDetailScreen extends StatelessWidget {
   static const routeName = "/meal-detail";
 
-  const MealDetailScreen({Key? key}) : super(key: key);
+  const MealDetailScreen({
+    Key? key,
+    @required this.toggleFavouriteMeal,
+    @required this.isFavourite,
+  }) : super(key: key);
+
+  final Function? toggleFavouriteMeal;
+  final Function? isFavourite;
 
   Widget _buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -64,6 +71,15 @@ class MealDetailScreen extends StatelessWidget {
                   child: Image.network(
                     routeArgs.imageUrl as String,
                     fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        "assets/images/no_connection.png",
+                        height: 200,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
               ),
@@ -127,15 +143,51 @@ class MealDetailScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {
-          Navigator.of(context).pop(routeArgs.id);
-        },
-        child: const Icon(
-          Icons.delete,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+      floatingActionButton: Container(
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: FloatingActionButton(
+                heroTag: null,
+                backgroundColor: Theme.of(context).primaryColor,
+                onPressed: () {
+                  Navigator.of(context).pop(routeArgs.id);
+                },
+                child: const Icon(
+                  Icons.delete,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: FloatingActionButton(
+                heroTag: null,
+                backgroundColor: Theme.of(context).primaryColor,
+                onPressed: () {
+                  toggleFavouriteMeal!(routeArgs.id);
+                },
+                child: Icon(
+                  isFavourite!(routeArgs.id) ? Icons.star : Icons.star_outline,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Theme.of(context).primaryColor,
+      //   onPressed: () {
+      //     Navigator.of(context).pop(routeArgs.id);
+      //   },
+      //   child: const Icon(
+      //     Icons.delete,
+      //   ),
+      // ),
     );
   }
 }
