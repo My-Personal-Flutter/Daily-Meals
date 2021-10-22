@@ -3,14 +3,24 @@ import 'package:daily_meals/screens/meal_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({Key? key, @required this.meal}) : super(key: key);
+  const MealItem({Key? key, @required this.meal, @required this.removeItem})
+      : super(key: key);
 
   final Meal? meal;
+  final Function? removeItem;
 
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context)
+        .pushNamed(
       MealDetailScreen.routeName,
       arguments: meal,
+    )
+        .then(
+      (value) {
+        if (value != null) {
+          removeItem!(value);
+        }
+      },
     );
   }
 
