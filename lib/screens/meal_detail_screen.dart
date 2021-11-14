@@ -144,7 +144,6 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
       floatingActionButton: Container(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
         child: Row(
@@ -179,15 +178,6 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Theme.of(context).primaryColor,
-      //   onPressed: () {
-      //     Navigator.of(context).pop(routeArgs.id);
-      //   },
-      //   child: const Icon(
-      //     Icons.delete,
-      //   ),
-      // ),
     );
   }
 }
